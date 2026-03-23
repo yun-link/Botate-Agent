@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+
+# Virtual environments
+.venv/
+
+# VS Code
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# Database
+*.db
+
+# Frontend
+node_modules/
+dist/
+dist-ssr/
+
+# Environment variables
+.env
+.env.local
+
+# npm
+.npm
+
+# Workspace
+workspace/
+
+# Debug
+debug.*
+test.*

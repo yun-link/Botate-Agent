@@ -1,0 +1,42 @@
+{
+    "provider_type": "openai_compatible",
+    "provider_name": "sf",
+    "base_url": "https://api.siliconflow.cn/v1/",
+    "models": {
+        "Qwen3.5-4B": {
+            "model_id": "Qwen/Qwen3-8B",
+            "thinking": {
+                "support_thinking": true,
+                "support_Answer": true,
+                "support_auto": false,
+                "support_effort": false,
+                "thinking": null,
+                "Answer": null,
+                "auto": null,
+                "effort": null
+            },
+            "modality": ["Text", "Image", "Video"],
+            "performance": {
+                "reasoning": 12,
+                "writing": 35,
+                "coding": 12,
+                "speed": 65,
+                "cost": 0
+            },
+            "other": null
+        }
+    },
+    "embedding_models": {
+        "Qwen3-Embedding-8B": {
+            "model_id": "Qwen/Qwen3-Embedding-8B",
+            "modality": ["Text"]
+
+        }
+    },
+    "reranker_models": {
+        "Qwen3-Reranker-8B": {
+            "model_id": "Qwen/Qwen3-Reranker-8B",
+            "modality": ["Text"]
+        }
+    }
+}

@@ -1,0 +1,51 @@
+{
+    "provider_type": "openai_compatible",
+    "provider_name": "kimi",
+    "base_url": "https://api.moonshot.cn/v1",
+    "models": {
+        "kimi-k2": {
+            "model_id": "kimi-k2-0905-preview",
+            "thinking": {
+                "support_thinking": false,
+                "support_Answer": true,
+                "support_auto": false,
+                "support_effort": false,
+                "thinking": null,
+                "Answer": null,
+                "auto": null,
+                "effort": null
+            },
+            "modality": ["Text"],
+            "performance": {
+                "reasoning": 51,
+                "writing": 86,
+                "coding": 82,
+                "speed": 30,
+                "cost": 80
+            },
+            "other": null
+        },
+        "kimi-k2-thinking": {
+            "model_id": "kimi-k2-0905-preview",
+            "thinking": {
+                "support_thinking": false,
+                "support_Answer": true,
+                "support_auto": false,
+                "support_effort": false,
+                "thinking": null,
+                "Answer": null,
+                "auto": null,
+                "effort": null
+            },
+            "modality": ["Text"],
+            "performance": {
+                "reasoning": 61,
+                "writing": 89,
+                "coding": 86,
+                "speed": 30,
+                "cost": 85
+            },
+            "other": null
+        }
+    }
+}
