@@ -1,0 +1,51 @@
+{
+    "provider_type": "openai_compatible",
+    "provider_name": "deepseek",
+    "base_url": "https://api.deepseek.com/v1",
+    "models": {
+        "deepseek-v3.2": {
+            "model_id": "deepseek-chat",
+            "thinking": {
+                "support_thinking": false,
+                "support_Answer": true,
+                "support_auto": false,
+                "support_effort": false,
+                "thinking": null,
+                "Answer": null,
+                "auto": null,
+                "effort": null
+            },
+            "modality": ["Text"],
+            "performance": {
+                "reasoning": 67,
+                "writing": 71,
+                "coding": 71,
+                "speed": 50,
+                "cost": 41
+            },
+            "other": null
+        },
+        "deepseek-v3.2-thinking": {
+            "model_id": "deepseek-reasoner",
+            "thinking": {
+                "support_thinking": true,
+                "support_Answer": false,
+                "support_auto": false,
+                "support_effort": false,
+                "thinking": null,
+                "Answer": null,
+                "auto": null,
+                "effort": null
+            },
+            "modality": ["Text"],
+            "performance": {
+                "reasoning": 72,
+                "writing": 76,
+                "coding": 79,
+                "speed": 40,
+                "cost": 41
+            },
+            "other": null
+        }
+    }
+}

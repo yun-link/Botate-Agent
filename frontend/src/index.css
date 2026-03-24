@@ -1,0 +1,64 @@
+ihtml, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 确保所有元素都有正确的字体继承 */
+button, input, textarea {
+  font-family: inherit;
+}
+
+/* 移除默认的按钮样式 */
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+/* 移除默认的输入框样式 */
+input, textarea {
+  outline: none;
+}
+
+/* 图片默认样式 */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 视频和音频默认样式 */
+video, audio {
+  max-width: 100%;
+}
+
+/* 代码块默认样式 */
+pre, code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+}
+
+/* 链接默认样式 */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 列表默认样式 */
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
