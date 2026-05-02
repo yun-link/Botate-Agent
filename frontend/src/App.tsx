@@ -1,7 +1,13 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
+<<<<<<< HEAD
 import { UserMessage, AssistantMessage, ChatInput, PermissionConfirm, TaskPanel } from './components';
 import { callAgent, getMessages, getProgress, resetAgent, confirmPermission } from './services/api';
 import type { Message, StreamChunk, FunctionCallContent, InputContentType, PermissionRequest, ProgressItem, TabInfo } from './types';
+=======
+import { UserMessage, AssistantMessage, ChatInput, PermissionConfirm } from './components';
+import { callAgent, getMessages, getProgress, resetAgent, confirmPermission } from './services/api';
+import type { Message, StreamChunk, FunctionCallContent, InputContentType, PermissionRequest } from './types';
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
 import './App.css';
 
 // 消息块类型：用于按顺序渲染推理、工具调用和回答
@@ -19,6 +25,7 @@ function App() {
   // 待确认的权限请求
   const [pendingPermission, setPendingPermission] = useState<PermissionRequest | null>(null);
   
+<<<<<<< HEAD
   // TaskPanel 相关状态
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [tabs, setTabs] = useState<TabInfo[]>([
@@ -27,6 +34,8 @@ function App() {
   const [activeTabId, setActiveTabId] = useState('progress');
   const [progressItems, setProgressItems] = useState<ProgressItem[]>([]);
   
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // 滚动到底部
@@ -106,6 +115,7 @@ function App() {
             return [...prev, { type: 'reasoning', content: chunk.content, isStreaming: true }];
           }
         });
+<<<<<<< HEAD
         // 更新进度项
         setProgressItems(prev => {
           const lastItem = prev[prev.length - 1];
@@ -126,6 +136,8 @@ function App() {
             }];
           }
         });
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
         break;
         
       case 'function_call':
@@ -149,6 +161,7 @@ function App() {
             return [...prev, { type: 'toolCall', toolCall: fc }];
           }
         });
+<<<<<<< HEAD
         // 更新进度项 - 标记上一个 reasoning 为完成
         setProgressItems(prev => {
           const newItems = prev.map(item => {
@@ -181,6 +194,8 @@ function App() {
           }
           return tab;
         }));
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
         break;
         
       case 'event':
@@ -290,16 +305,20 @@ function App() {
       setCurrentBlocks([]);
       setIsStreaming(false);
       setIsLoading(false);
+<<<<<<< HEAD
       // 重置面板状态
       setIsPanelOpen(false);
       setTabs([{ id: 'progress', title: '进度', type: 'progress', closable: false }]);
       setActiveTabId('progress');
       setProgressItems([]);
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
     } catch (error) {
       console.error('Failed to reset:', error);
     }
   }, []);
 
+<<<<<<< HEAD
   // 处理工具点击 - 打开面板并添加详情标签页
   const handleToolClick = useCallback((toolCall: FunctionCallContent) => {
     // 打开面板
@@ -349,6 +368,8 @@ function App() {
     setIsPanelOpen(false);
   }, []);
 
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
   // 提取文本内容
   const extractTextContent = (content: Message['content']): string => {
     if (typeof content === 'string') {
@@ -392,7 +413,11 @@ function App() {
   }, [pendingPermission]);
 
   return (
+<<<<<<< HEAD
     <div className={`app ${isPanelOpen ? 'panel-open' : ''}`}>
+=======
+    <div className="app">
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
       {/* 主聊天区域 */}
       <div className="chat-container">
         {/* 顶部栏 */}
@@ -427,7 +452,10 @@ function App() {
                           reasoningContent={message.reasoning_content}
                           toolCalls={[]}
                           isStreaming={false}
+<<<<<<< HEAD
                           onToolClick={handleToolClick}
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
                         />
                       </div>
                     </div>
@@ -440,7 +468,10 @@ function App() {
                           reasoningContent=""
                           toolCalls={message.tool_calls}
                           isStreaming={false}
+<<<<<<< HEAD
                           onToolClick={handleToolClick}
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
                         />
                       </div>
                     </div>
@@ -453,7 +484,10 @@ function App() {
                           reasoningContent=""
                           toolCalls={[]}
                           isStreaming={false}
+<<<<<<< HEAD
                           onToolClick={handleToolClick}
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
                         />
                       </div>
                     </div>
@@ -469,7 +503,10 @@ function App() {
                           reasoningContent={message.reasoning_content || ''}
                           toolCalls={message.tool_calls || []}
                           isStreaming={false}
+<<<<<<< HEAD
                           onToolClick={handleToolClick}
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
                         />
                       </div>
                     </div>
@@ -504,7 +541,10 @@ function App() {
                         reasoningContent={block.content}
                         toolCalls={[]}
                         isStreaming={block.isStreaming}
+<<<<<<< HEAD
                         onToolClick={handleToolClick}
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
                       />
                     );
                   } else if (block.type === 'toolCall') {
@@ -518,7 +558,10 @@ function App() {
                           isStreaming={false}
                           permissionDenied={toolBlock.permissionDenied}
                           permissionReason={toolBlock.permissionReason}
+<<<<<<< HEAD
                           onToolClick={handleToolClick}
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
                         />
                         {toolBlock.permissionDenied && toolBlock.permissionReason && pendingPermission && (
                           <PermissionConfirm
@@ -537,7 +580,10 @@ function App() {
                         reasoningContent=""
                         toolCalls={[]}
                         isStreaming={block.isStreaming}
+<<<<<<< HEAD
                         onToolClick={handleToolClick}
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
                       />
                     );
                   }
@@ -559,6 +605,7 @@ function App() {
           />
         </div>
       </div>
+<<<<<<< HEAD
 
       {/* 任务跟踪面板 */}
       <TaskPanel
@@ -571,6 +618,8 @@ function App() {
         onTabClose={handleTabClose}
         onToolClick={handleToolClick}
       />
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
     </div>
   );
 }

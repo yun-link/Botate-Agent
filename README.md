@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 div align="center">
 
 ![logo](./images/Logo.png)
@@ -13,6 +14,11 @@ div align="center">
 [![GitHub pull request](https://img.shields.io/badge/PRs-welcome-blue)](https://github.com/yunlink/Botate-Agent/pulls)
 
 </div>
+=======
+# Botate-Agent V2.0
+
+基于大语言模型的 AI Agent 框架，支持流式响应、工具调用、技能管理和长期记忆功能。
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
 
 ## 项目简介
 
@@ -30,6 +36,7 @@ Botate-Agent 是一个现代化的 AI Agent 系统，采用前后端分离架构
 - 💾 **长期记忆**: 基于向量检索的记忆库系统，支持语义搜索
 - 📞 **函数调用**: 支持模型 function calling 能力
 
+<<<<<<< HEAD
 ### 更新日志
 <details> 
 <summary> <b>[v2.1.0] - 2026-05-02</b></summary>
@@ -54,6 +61,8 @@ Botate-Agent 是一个现代化的 AI Agent 系统，采用前后端分离架构
 - 新增事件系统
 - 新增日志系统
 </details> 
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
 ### 前端特性
 - 💬 实时聊天界面，支持流式响应
 - 🧠 显示助手的推理过程

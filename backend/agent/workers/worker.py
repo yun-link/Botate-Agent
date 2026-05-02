@@ -16,7 +16,11 @@ import platform
 from model.message_schemas import Text, Content
 from model.tool import register_tool
 from agent.base_agent import BaseAgent
+<<<<<<< HEAD
 from agent.tools import load_public_tools
+=======
+from agent.tools import load_global_tools
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
 from agent.skill_manager import SkillManager, SkillResult
 from agent.permission import PermissionManager, PermissionCheckResult
 from agent.events import PermissionDeniedEvent
@@ -60,7 +64,11 @@ class Worker(BaseAgent):
         self.skill_manager = SkillManager()
 
         # 加载全局工具
+<<<<<<< HEAD
         self.global_tools = load_public_tools()
+=======
+        self.global_tools = load_global_tools()
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
 
         # 创建 skill 工具
         self.skill_tools = self._create_skill_tool()
@@ -251,6 +259,27 @@ class Worker(BaseAgent):
         except Exception as e:
             self.logger.error(e)
             return f"工具执行错误：{str(e)}"
+<<<<<<< HEAD
+=======
+
+    async def _memory_save_loop(self):
+        """
+        定时保存记忆的后台任务
+        
+        定期检查是否到了保存时间，如果到了就调用 context 的保存记忆功能。
+        """
+        while True:
+            await asyncio.sleep(1)  # 每秒检查一次
+            current_time = time.time()
+            if current_time - self._last_memory_save_time >= self._memory_save_interval:
+                self.logger.info('定时保存记忆')
+                try:
+                    self.message_context.save_memories()
+                    self._last_memory_save_time = current_time
+                    self.logger.info('记忆保存完成')
+                except Exception as e:
+                    self.logger.error(f'保存记忆失败：{str(e)}')
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
     def _get_workspace_files(self):
         path = PATH_CONFIG.WORKSPACE_PATH
         items = os.listdir(path)
@@ -274,6 +303,11 @@ class Worker(BaseAgent):
         Yields:
             ResponseContent 或轮次结束标记
         """
+<<<<<<< HEAD
+=======
+        # 启动定时保存记忆的后台任务
+        self._memory_save_task = asyncio.create_task(self._memory_save_loop())
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
 
         # 从 task 中提取文本用于格式化 prompt
         self.logger.info(f'Agent 开始运行-task：{str(task)[:100]}')

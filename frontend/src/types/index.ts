@@ -128,6 +128,7 @@ export interface PermissionRequest {
   confirmation_id: string;
   timestamp: string;
 }
+<<<<<<< HEAD
 
 // 进度项类型（用于进度标签页）
 export interface ProgressItem {
@@ -148,3 +149,5 @@ export interface TabInfo {
   toolCall?: FunctionCallContent;
   isStreaming?: boolean;
 }
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d

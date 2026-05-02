@@ -238,7 +238,10 @@ class BaseAgent(ABC):
             
             # 检查是否包含结束标记
             if self._check_end(full_answer):
+<<<<<<< HEAD
                 self.message_context.save_memories()
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
                 break
             
             # 处理工具调用
@@ -297,7 +300,10 @@ class BaseAgent(ABC):
             
             # 返回轮次结束事件
             yield RoundEndEvent()
+<<<<<<< HEAD
             
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
     
     def add_message(self, message: Message, isimportant: bool = False):
         """

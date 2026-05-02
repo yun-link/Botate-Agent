@@ -14,7 +14,11 @@ from .search import WebSearch
 from .memory_bank import SearchMemory
 
 
+<<<<<<< HEAD
 def load_public_tools() -> List[Tool]:
+=======
+def load_global_tools() -> List[Tool]:
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
 
     mcp_tools = []
     try:

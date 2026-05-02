@@ -9,7 +9,12 @@ import json
 from pydantic import BaseModel, Field, model_validator
 import numpy as np
 
+<<<<<<< HEAD
 from model.message_schemas import Message, Text, FunctionCallContent
+=======
+from .models import MemoryModel
+from model.message_schemas import Message, Text
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
 
 
 class Memory(BaseModel):
@@ -22,12 +27,27 @@ class Memory(BaseModel):
     # 记忆ID（UUID4）
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     
+<<<<<<< HEAD
+=======
+    # 记忆摘要（可选）
+    summary: Optional[str] = None
+    
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
     # 消息列表原始数据
     messages: List[Message] = Field(default_factory=list)
     
     # 文本内容（格式化后的字符串）
     text_content: str = ""
     
+<<<<<<< HEAD
+=======
+    # 向量数据（可选）
+    vector: Optional[List[float]] = None
+    
+    # 权重：记忆的重要程度
+    weight: float = Field(default=1.0)
+    
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
     # 关联记忆ID列表
     related_memory_ids: List[str] = Field(default_factory=list)
     
@@ -42,16 +62,33 @@ class Memory(BaseModel):
         格式化记忆的文本内容
         
         格式：
+<<<<<<< HEAD
+=======
+        Summary: {summary}
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
         Messages: 
         时间（{YYYY mm.DD HH:MM}）-角色：内容
         时间（{YYYY mm.DD HH:MM}）-角色：内容
         ...
         
+<<<<<<< HEAD
+=======
+        如果summary为空或未启用，则不包含Summary部分
+        
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
         Returns:
             格式化后的文本内容
         """
         parts = []
+<<<<<<< HEAD
     
+=======
+        
+        # 添加摘要部分（如果有）
+        if self.summary:
+            parts.append(f"Summary: {self.summary}")
+        
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
         # 添加消息部分
         if self.messages:
             message_lines = []
@@ -66,13 +103,21 @@ class Memory(BaseModel):
                 # 处理时间格式
                 formatted_time = self._format_timestamp(timestamp)
                 
+<<<<<<< HEAD
                 message_lines.append(f"{formatted_time}-{role}：{content_str}"[:512])
+=======
+                message_lines.append(f"{formatted_time}-{role}：{content_str}")
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
             
             if message_lines:
                 parts.append("Messages:")
                 parts.extend(message_lines)
         
+<<<<<<< HEAD
         return ("\n".join(parts))
+=======
+        return "\n".join(parts)
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
     
     def _format_timestamp(self, timestamp: str) -> str:
         """
@@ -136,8 +181,11 @@ class Memory(BaseModel):
                         f"请确保传入的 Message content 为纯文本。"
                     )
             return " ".join(result)
+<<<<<<< HEAD
         elif isinstance(content, FunctionCallContent):
             return f'[Function Call] {content.name}: {content.params} - {content.result}'
+=======
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
         else:
             raise TypeError(
                 f"记忆库只支持纯文本内容（str 或 Text 类型），"
@@ -149,6 +197,66 @@ class Memory(BaseModel):
         """更新文本内容"""
         self.text_content = self.format_text_content()
     
+<<<<<<< HEAD
+=======
+    @classmethod
+    def from_model(cls, model: MemoryModel) -> 'Memory':
+        """
+        从数据库模型创建Memory实例
+        
+        Args:
+            model: SQLAlchemy MemoryModel 实例
+            
+        Returns:
+            Memory 实例
+        """
+        # 将字典列表转换为 Message 对象列表
+        messages_data = model.messages_data or []
+        messages = []
+        for msg_dict in messages_data:
+            try:
+                messages.append(Message(**msg_dict))
+            except Exception:
+                # 如果转换失败，跳过该消息
+                continue
+        
+        return cls(
+            id=model.id,
+            summary=model.summary,
+            messages=messages,
+            text_content=model.text_content,
+            vector=model.vector,
+            weight=model.weight,
+            related_memory_ids=model.related_memory_ids,
+            created_at=model.created_at,
+            updated_at=model.updated_at
+        )
+    
+    def to_model(self) -> MemoryModel:
+        """
+        转换为数据库模型
+        
+        Returns:
+            SQLAlchemy MemoryModel 实例
+        """
+        # 将 Message 对象列表转换为字典列表
+        messages_data = None
+        if self.messages:
+            messages_data = [msg.model_dump(exclude_none=True) for msg in self.messages]
+        
+        model = MemoryModel()
+        model.id = self.id
+        model.summary = self.summary
+        model.messages_data = messages_data
+        model.text_content = self.text_content
+        model.vector = self.vector.tolist() if hasattr(self.vector, 'tolist') else self.vector
+        model.weight = self.weight
+        model.related_memory_ids = self.related_memory_ids
+        model.created_at = self.created_at
+        model.updated_at = self.updated_at
+        return model
+    
+>>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
     def __str__(self) -> str:
         """返回格式化的记忆字符串"""
         return self.text_content if self.text_content else self.format_text_content()
