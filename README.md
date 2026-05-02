@@ -6,11 +6,11 @@
 
 <div align="center">
 
-![visitors](https://visitor-badge.laobi.icu/badge?page_id=yunlink/Botate-Agent)
-[![GitHub Repo stars](https://img.shields.io/github/stars/yunlink/Botate-Agent?style=social)](https://github.com/yunlink/Botate-Agent/stargazers)
-[![GitHub Code License](https://img.shields.io/github/license/yunlink/Botate-Agent)](LICENSE)
-[![GitHub last commit](https://img.shields.io/github/last-commit/yunlink/Botate-Agent)](https://github.com/yunlink/Botate-Agent/commits/master)
-[![GitHub pull request](https://img.shields.io/badge/PRs-welcome-blue)](https://github.com/yunlink/Botate-Agent/pulls)
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=yun-link/Botate-Agent)
+[![GitHub Repo stars](https://img.shields.io/github/stars/yun-link/Botate-Agent?style=social)](https://github.com/yun-link/Botate-Agent/stargazers)
+[![GitHub Code License](https://img.shields.io/github/license/yun-link/Botate-Agent)](LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/yun-link/Botate-Agent)](https://github.com/yun-link/Botate-Agent/commits/main)
+[![GitHub pull request](https://img.shields.io/badge/PRs-welcome-blue)](https://github.com/yun-link/Botate-Agent/pulls)
 
 </div>
 
