@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { ReasoningBlock } from './ReasoningBlock';
 import { ToolCallBlock } from './ToolCallBlock';
-<<<<<<< HEAD
 import { MarkdownRenderer } from './MarkdownRenderer';
-=======
->>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
 import type { FunctionCallContent } from '../types';
 
 interface AssistantMessageProps {
@@ -15,10 +12,7 @@ interface AssistantMessageProps {
   isStreaming?: boolean;
   permissionDenied?: boolean;
   permissionReason?: string;
-<<<<<<< HEAD
   onToolClick?: (toolCall: FunctionCallContent) => void;
-=======
->>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
 }
 
 export const AssistantMessage: React.FC<AssistantMessageProps> = ({
@@ -28,10 +22,7 @@ export const AssistantMessage: React.FC<AssistantMessageProps> = ({
   isStreaming = false,
   permissionDenied = false,
   permissionReason,
-<<<<<<< HEAD
   onToolClick,
-=======
->>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
 }) => {
   const [copied, setCopied] = React.useState(false);
   const [, setDisplayedContent] = useState('');
@@ -77,16 +68,12 @@ export const AssistantMessage: React.FC<AssistantMessageProps> = ({
               toolCall={toolCall}
               permissionDenied={permissionDenied}
               permissionReason={permissionReason}
-<<<<<<< HEAD
               onClick={onToolClick}
-=======
->>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
             />
           ))}
         </div>
       )}
 
-<<<<<<< HEAD
       {/* 回答内容 - 使用 Markdown 渲染 */}
       {content && (
         <div className="answer-container">
@@ -95,13 +82,6 @@ export const AssistantMessage: React.FC<AssistantMessageProps> = ({
               content={content} 
               isStreaming={isStreaming} 
             />
-=======
-      {/* 回答内容 */}
-      {content && (
-        <div className="answer-container">
-          <div className="answer-content">
-            <div className="answer-text">{content}</div>
->>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
           </div>
           <div className="answer-actions">
             <button 

@@ -344,11 +344,7 @@ SearchFiles = Tool(
 
 RunCommand = Tool(
     name="RunCommand",
-<<<<<<< HEAD
     description="根据命令使用subprocess进行运行",
-=======
-    description="根据命令使用subprocess进行运行，有概率出现编码问题。如果出现，请优先检查是否输出结果，否则忽略。",
->>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
     handler=_run_command_handler,
     parameters={
         "type": "object",

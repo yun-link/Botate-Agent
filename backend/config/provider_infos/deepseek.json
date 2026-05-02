@@ -3,7 +3,6 @@
     "provider_name": "deepseek",
     "base_url": "https://api.deepseek.com/v1",
     "models": {
-<<<<<<< HEAD
         "deepseek-v4-flash": {
             "model_id": "deepseek-v4-flash",
             "thinking": {
@@ -51,49 +50,6 @@
                 "coding": 90,
                 "speed": 40,
                 "cost": 85
-=======
-        "deepseek-v3.2": {
-            "model_id": "deepseek-chat",
-            "thinking": {
-                "support_thinking": false,
-                "support_Answer": true,
-                "support_auto": false,
-                "support_effort": false,
-                "thinking": null,
-                "Answer": null,
-                "auto": null,
-                "effort": null
-            },
-            "modality": ["Text"],
-            "performance": {
-                "reasoning": 67,
-                "writing": 71,
-                "coding": 71,
-                "speed": 50,
-                "cost": 41
-            },
-            "other": null
-        },
-        "deepseek-v3.2-thinking": {
-            "model_id": "deepseek-reasoner",
-            "thinking": {
-                "support_thinking": true,
-                "support_Answer": false,
-                "support_auto": false,
-                "support_effort": false,
-                "thinking": null,
-                "Answer": null,
-                "auto": null,
-                "effort": null
-            },
-            "modality": ["Text"],
-            "performance": {
-                "reasoning": 72,
-                "writing": 76,
-                "coding": 79,
-                "speed": 40,
-                "cost": 41
->>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
             },
             "other": null
         }

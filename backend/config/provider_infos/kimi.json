@@ -3,7 +3,6 @@
     "provider_name": "kimi",
     "base_url": "https://api.moonshot.cn/v1",
     "models": {
-<<<<<<< HEAD
         "kimi-k2.6": {
             "model_id": "kimi-k2.6",
             "thinking": {
@@ -13,58 +12,18 @@
                 "support_effort": false,
                 "thinking": {"type": "enabled"},
                 "Answer": {"type": "disabled"},
-=======
-        "kimi-k2": {
-            "model_id": "kimi-k2-0905-preview",
-            "thinking": {
-                "support_thinking": false,
-                "support_Answer": true,
-                "support_auto": false,
-                "support_effort": false,
-                "thinking": null,
-                "Answer": null,
->>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
                 "auto": null,
                 "effort": null
             },
             "modality": ["Text"],
             "performance": {
-<<<<<<< HEAD
                 "reasoning": 82,
-=======
-                "reasoning": 51,
->>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
                 "writing": 86,
                 "coding": 82,
                 "speed": 30,
                 "cost": 80
             },
             "other": null
-<<<<<<< HEAD
-=======
-        },
-        "kimi-k2-thinking": {
-            "model_id": "kimi-k2-0905-preview",
-            "thinking": {
-                "support_thinking": false,
-                "support_Answer": true,
-                "support_auto": false,
-                "support_effort": false,
-                "thinking": null,
-                "Answer": null,
-                "auto": null,
-                "effort": null
-            },
-            "modality": ["Text"],
-            "performance": {
-                "reasoning": 61,
-                "writing": 89,
-                "coding": 86,
-                "speed": 30,
-                "cost": 85
-            },
-            "other": null
->>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
         }
     }
 }

@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@types/react-syntax-highlighter": "^15.5.13",
     "axios": "^1.13.6",
     "lucide-react": "^0.577.0",
@@ -19,12 +18,6 @@
     "react-markdown": "^10.1.0",
     "react-syntax-highlighter": "^16.1.1",
     "remark-gfm": "^4.0.1"
-=======
-    "axios": "^1.13.6",
-    "lucide-react": "^0.577.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
->>>>>>> 3b6207bf3905d3834c0f1280877b0f8e91171b1d
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
