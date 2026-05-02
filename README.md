@@ -1,6 +1,18 @@
-# Botate-Agent V2.0
+div align="center">
 
-基于大语言模型的 AI Agent 框架，支持流式响应、工具调用、技能管理和长期记忆功能。
+![logo](./images/Logo.png)
+
+</div>
+
+<div align="center">
+
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=yunlink/Botate-Agent)
+[![GitHub Repo stars](https://img.shields.io/github/stars/yunlink/Botate-Agent?style=social)](https://github.com/yunlink/Botate-Agent/stargazers)
+[![GitHub Code License](https://img.shields.io/github/license/yunlink/Botate-Agent)](LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/yunlink/Botate-Agent)](https://github.com/yunlink/Botate-Agent/commits/master)
+[![GitHub pull request](https://img.shields.io/badge/PRs-welcome-blue)](https://github.com/yunlink/Botate-Agent/pulls)
+
+</div>
 
 ## 项目简介
 
@@ -18,6 +30,30 @@ Botate-Agent 是一个现代化的 AI Agent 系统，采用前后端分离架构
 - 💾 **长期记忆**: 基于向量检索的记忆库系统，支持语义搜索
 - 📞 **函数调用**: 支持模型 function calling 能力
 
+### 更新日志
+<details> 
+<summary> <b>[v2.1.0] - 2026-05-02</b></summary>
+- 前端界面新增视窗详情
+- 记忆库功能大规模简化
+- 日志和记忆库在用户目录保存
+- 模型信息更新：
+    * 移除 DeepSeek-V3.2 系列模型，支持 DeepSeek-V4 系列模型
+    * 移除 doubao-seed-1.6-lite 模型，支持 doubao-seed-2.0 模型
+    * 移除 Kimi-K2 系列模型，支持 Kimi-K2.6 系列模型
+    * 默认上下文模型更新为 doubao-seed-2.0-mini 模型
+    * 默认 Worker 模型更新为 DeepSeek-V4-flash 模型
+</details>
+
+<details> 
+<summary> <b>[v2.0.0] - 2026-03-24</b></summary>
+- 2.0 版本发布，包含Agent核心功能
+- 新增记忆库系统
+- 新增技能系统
+- 新增工具系统
+- 新增权限系统
+- 新增事件系统
+- 新增日志系统
+</details> 
 ### 前端特性
 - 💬 实时聊天界面，支持流式响应
 - 🧠 显示助手的推理过程

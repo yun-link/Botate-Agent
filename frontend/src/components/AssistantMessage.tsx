@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { ReasoningBlock } from './ReasoningBlock';
 import { ToolCallBlock } from './ToolCallBlock';
+import { MarkdownRenderer } from './MarkdownRenderer';
 import type { FunctionCallContent } from '../types';
 
 interface AssistantMessageProps {
@@ -11,6 +12,7 @@ interface AssistantMessageProps {
   isStreaming?: boolean;
   permissionDenied?: boolean;
   permissionReason?: string;
+  onToolClick?: (toolCall: FunctionCallContent) => void;
 }
 
 export const AssistantMessage: React.FC<AssistantMessageProps> = ({
@@ -20,6 +22,7 @@ export const AssistantMessage: React.FC<AssistantMessageProps> = ({
   isStreaming = false,
   permissionDenied = false,
   permissionReason,
+  onToolClick,
 }) => {
   const [copied, setCopied] = React.useState(false);
   const [, setDisplayedContent] = useState('');
@@ -65,16 +68,20 @@ export const AssistantMessage: React.FC<AssistantMessageProps> = ({
               toolCall={toolCall}
               permissionDenied={permissionDenied}
               permissionReason={permissionReason}
+              onClick={onToolClick}
             />
           ))}
         </div>
       )}
 
-      {/* 回答内容 */}
+      {/* 回答内容 - 使用 Markdown 渲染 */}
       {content && (
         <div className="answer-container">
           <div className="answer-content">
-            <div className="answer-text">{content}</div>
+            <MarkdownRenderer 
+              content={content} 
+              isStreaming={isStreaming} 
+            />
           </div>
           <div className="answer-actions">
             <button 

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { UserMessage, AssistantMessage, ChatInput, PermissionConfirm } from './components';
+import { UserMessage, AssistantMessage, ChatInput, PermissionConfirm, TaskPanel } from './components';
 import { callAgent, getMessages, getProgress, resetAgent, confirmPermission } from './services/api';
-import type { Message, StreamChunk, FunctionCallContent, InputContentType, PermissionRequest } from './types';
+import type { Message, StreamChunk, FunctionCallContent, InputContentType, PermissionRequest, ProgressItem, TabInfo } from './types';
 import './App.css';
 
 // 消息块类型：用于按顺序渲染推理、工具调用和回答
@@ -18,6 +18,14 @@ function App() {
   const [currentBlocks, setCurrentBlocks] = useState<MessageBlock[]>([]);
   // 待确认的权限请求
   const [pendingPermission, setPendingPermission] = useState<PermissionRequest | null>(null);
+  
+  // TaskPanel 相关状态
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [tabs, setTabs] = useState<TabInfo[]>([
+    { id: 'progress', title: '进度', type: 'progress', closable: false }
+  ]);
+  const [activeTabId, setActiveTabId] = useState('progress');
+  const [progressItems, setProgressItems] = useState<ProgressItem[]>([]);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -98,6 +106,26 @@ function App() {
             return [...prev, { type: 'reasoning', content: chunk.content, isStreaming: true }];
           }
         });
+        // 更新进度项
+        setProgressItems(prev => {
+          const lastItem = prev[prev.length - 1];
+          if (lastItem && lastItem.type === 'reasoning' && lastItem.isStreaming) {
+            const newItems = [...prev];
+            newItems[newItems.length - 1] = {
+              ...lastItem,
+              content: (lastItem.content || '') + chunk.content,
+            };
+            return newItems;
+          } else {
+            return [...prev, {
+              id: `reasoning-${Date.now()}`,
+              type: 'reasoning',
+              content: chunk.content,
+              timestamp: new Date().toISOString(),
+              isStreaming: true,
+            }];
+          }
+        });
         break;
         
       case 'function_call':
@@ -121,6 +149,38 @@ function App() {
             return [...prev, { type: 'toolCall', toolCall: fc }];
           }
         });
+        // 更新进度项 - 标记上一个 reasoning 为完成
+        setProgressItems(prev => {
+          const newItems = prev.map(item => {
+            if (item.type === 'reasoning' && item.isStreaming) {
+              return { ...item, isStreaming: false };
+            }
+            return item;
+          });
+          const existingIndex = newItems.findIndex(item => item.type === 'toolCall' && item.toolCall?.id === fc.id);
+          if (existingIndex >= 0) {
+            newItems[existingIndex] = {
+              ...newItems[existingIndex],
+              toolCall: fc,
+            };
+            return newItems;
+          } else {
+            return [...newItems, {
+              id: `tool-${fc.id}`,
+              type: 'toolCall',
+              toolCall: fc,
+              timestamp: new Date().toISOString(),
+              isStreaming: false,
+            }];
+          }
+        });
+        // 同步更新已打开的工具标签页
+        setTabs(prev => prev.map(tab => {
+          if (tab.type === 'toolDetail' && tab.toolCall?.id === fc.id) {
+            return { ...tab, toolCall: fc, isStreaming: fc.result === undefined };
+          }
+          return tab;
+        }));
         break;
         
       case 'event':
@@ -230,9 +290,63 @@ function App() {
       setCurrentBlocks([]);
       setIsStreaming(false);
       setIsLoading(false);
+      // 重置面板状态
+      setIsPanelOpen(false);
+      setTabs([{ id: 'progress', title: '进度', type: 'progress', closable: false }]);
+      setActiveTabId('progress');
+      setProgressItems([]);
     } catch (error) {
       console.error('Failed to reset:', error);
     }
+  }, []);
+
+  // 处理工具点击 - 打开面板并添加详情标签页
+  const handleToolClick = useCallback((toolCall: FunctionCallContent) => {
+    // 打开面板
+    setIsPanelOpen(true);
+    
+    // 检查是否已存在该工具的标签页
+    const existingTab = tabs.find(t => t.id === `tool-${toolCall.id}`);
+    const isStreaming = toolCall.result === undefined;
+    
+    if (existingTab) {
+      // 切换到现有标签页并更新工具数据
+      setActiveTabId(existingTab.id);
+      setTabs(prev => prev.map(t => 
+        t.id === existingTab.id ? { ...t, toolCall, isStreaming } : t
+      ));
+    } else {
+      // 添加新标签页
+      const newTab: TabInfo = {
+        id: `tool-${toolCall.id}`,
+        title: toolCall.name,
+        type: 'toolDetail',
+        closable: true,
+        toolCall,
+        isStreaming,
+      };
+      setTabs(prev => [...prev, newTab]);
+      setActiveTabId(newTab.id);
+    }
+  }, [tabs]);
+
+  // 处理标签页切换
+  const handleTabChange = useCallback((tabId: string) => {
+    setActiveTabId(tabId);
+  }, []);
+
+  // 处理标签页关闭
+  const handleTabClose = useCallback((tabId: string) => {
+    setTabs(prev => prev.filter(t => t.id !== tabId));
+    // 如果关闭的是当前标签页，切换到进度标签页
+    if (activeTabId === tabId) {
+      setActiveTabId('progress');
+    }
+  }, [activeTabId]);
+
+  // 关闭面板
+  const handlePanelClose = useCallback(() => {
+    setIsPanelOpen(false);
   }, []);
 
   // 提取文本内容
@@ -278,7 +392,7 @@ function App() {
   }, [pendingPermission]);
 
   return (
-    <div className="app">
+    <div className={`app ${isPanelOpen ? 'panel-open' : ''}`}>
       {/* 主聊天区域 */}
       <div className="chat-container">
         {/* 顶部栏 */}
@@ -313,6 +427,7 @@ function App() {
                           reasoningContent={message.reasoning_content}
                           toolCalls={[]}
                           isStreaming={false}
+                          onToolClick={handleToolClick}
                         />
                       </div>
                     </div>
@@ -325,6 +440,7 @@ function App() {
                           reasoningContent=""
                           toolCalls={message.tool_calls}
                           isStreaming={false}
+                          onToolClick={handleToolClick}
                         />
                       </div>
                     </div>
@@ -337,6 +453,7 @@ function App() {
                           reasoningContent=""
                           toolCalls={[]}
                           isStreaming={false}
+                          onToolClick={handleToolClick}
                         />
                       </div>
                     </div>
@@ -352,6 +469,7 @@ function App() {
                           reasoningContent={message.reasoning_content || ''}
                           toolCalls={message.tool_calls || []}
                           isStreaming={false}
+                          onToolClick={handleToolClick}
                         />
                       </div>
                     </div>
@@ -386,6 +504,7 @@ function App() {
                         reasoningContent={block.content}
                         toolCalls={[]}
                         isStreaming={block.isStreaming}
+                        onToolClick={handleToolClick}
                       />
                     );
                   } else if (block.type === 'toolCall') {
@@ -399,6 +518,7 @@ function App() {
                           isStreaming={false}
                           permissionDenied={toolBlock.permissionDenied}
                           permissionReason={toolBlock.permissionReason}
+                          onToolClick={handleToolClick}
                         />
                         {toolBlock.permissionDenied && toolBlock.permissionReason && pendingPermission && (
                           <PermissionConfirm
@@ -417,6 +537,7 @@ function App() {
                         reasoningContent=""
                         toolCalls={[]}
                         isStreaming={block.isStreaming}
+                        onToolClick={handleToolClick}
                       />
                     );
                   }
@@ -438,6 +559,18 @@ function App() {
           />
         </div>
       </div>
+
+      {/* 任务跟踪面板 */}
+      <TaskPanel
+        isOpen={isPanelOpen}
+        tabs={tabs}
+        activeTabId={activeTabId}
+        progressItems={progressItems}
+        onClose={handlePanelClose}
+        onTabChange={handleTabChange}
+        onTabClose={handleTabClose}
+        onToolClick={handleToolClick}
+      />
     </div>
   );
 }

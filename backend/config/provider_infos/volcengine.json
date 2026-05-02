@@ -57,33 +57,6 @@
             },
             "other": "在思维链启用或使用 auto 模式时思考的时间会非常长，建议在**极其困难**的任务时使用，日常任务使用'low'模式或'medium'模式"
         },
-        "doubao-seed-1.6-lite": {
-            "model_id": "doubao-seed-1-6-lite-251015",
-            "thinking": {
-                "support_thinking": true,
-                "support_Answer": true,
-                "support_auto": false,
-                "support_effort": true,
-                "thinking": {"type": "enabled"},
-                "Answer": {"type": "disabled"},
-                "auto": null,
-                "effort": {
-                    "high": "high",
-                    "minimal": "minimal",
-                    "low": "low",
-                    "medium": "medium"
-                }
-            },
-            "modality": ["Text", "Video", "Image"],
-            "performance": {
-                "reasoning": 16,
-                "writing": 43,
-                "coding": 12,
-                "speed": 64,
-                "cost": 10
-            },
-            "other": "推理能力极差，只建议简单任务使用"
-        },
         "doubao-seed-2.0-lite": {
             "model_id": "doubao-seed-2-0-lite-260215",
             "thinking": {
@@ -103,13 +76,67 @@
             },
             "modality": ["Text", "Video", "Image"],
             "performance": {
-                "reasoning": 16,
+                "reasoning": 59,
+                "writing": 43,
+                "coding": 12,
+                "speed": 64,
+                "cost": 25
+            },
+            "other": "推理能力中等"
+        },
+        "doubao-seed-2.0-mini": {
+            "model_id": "doubao-seed-2-0-mini-260215",
+            "thinking": {
+                "support_thinking": true,
+                "support_Answer": true,
+                "support_auto": false,
+                "support_effort": true,
+                "thinking": {"type": "enabled"},
+                "Answer": {"type": "disabled"},
+                "auto": null,
+                "effort": {
+                    "high": "high",
+                    "minimal": "minimal",
+                    "low": "low",
+                    "medium": "medium"
+                }
+            },
+            "modality": ["Text", "Video", "Image"],
+            "performance": {
+                "reasoning": 43,
                 "writing": 43,
                 "coding": 12,
                 "speed": 64,
                 "cost": 10
             },
             "other": "推理能力极差，只建议简单任务使用"
+        },
+        "doubao-seed-2.0-pro": { 
+            "model_id": "doubao-seed-2-0-pro-260215",
+            "thinking": {
+                "support_thinking": true,
+                "support_Answer": true,
+                "support_auto": false,
+                "support_effort": true,
+                "thinking": {"type": "enabled"},
+                "Answer": {"type": "disabled"},
+                "auto": null,
+                "effort": {
+                    "high": "high",
+                    "minimal": "minimal",
+                    "low": "low",
+                    "medium": "medium"
+                }
+            },
+            "modality": ["Text", "Video", "Image"],
+            "performance": {
+                "reasoning": 82,
+                "writing": 65,
+                "coding": 84,
+                "speed": 32,
+                "cost": 85
+            },
+            "other": "推理能力强大"
         }
     }
 }

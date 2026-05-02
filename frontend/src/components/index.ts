@@ -4,3 +4,7 @@ export { ReasoningBlock } from './ReasoningBlock';
 export { ToolCallBlock } from './ToolCallBlock';
 export { ChatInput } from './ChatInput';
 export { PermissionConfirm } from './PermissionConfirm';
+export { MarkdownRenderer } from './MarkdownRenderer';
+export { TaskPanel } from './TaskPanel';
+export { ProgressTab } from './ProgressTab';
+export { ToolDetailTab } from './ToolDetailTab';

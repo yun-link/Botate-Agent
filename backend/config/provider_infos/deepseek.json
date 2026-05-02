@@ -3,47 +3,53 @@
     "provider_name": "deepseek",
     "base_url": "https://api.deepseek.com/v1",
     "models": {
-        "deepseek-v3.2": {
-            "model_id": "deepseek-chat",
+        "deepseek-v4-flash": {
+            "model_id": "deepseek-v4-flash",
             "thinking": {
-                "support_thinking": false,
+                "support_thinking": true,
                 "support_Answer": true,
                 "support_auto": false,
-                "support_effort": false,
-                "thinking": null,
-                "Answer": null,
+                "support_effort": true,
+                "thinking": {"type": "enabled"},
+                "Answer": {"type": "disabled"},
                 "auto": null,
-                "effort": null
+                "effort": {
+                    "max": "max",
+                    "hign": "hign"
+                }
             },
             "modality": ["Text"],
             "performance": {
-                "reasoning": 67,
-                "writing": 71,
-                "coding": 71,
-                "speed": 50,
-                "cost": 41
+                "reasoning": 75,
+                "writing": 81,
+                "coding": 81,
+                "speed": 90,
+                "cost": 20
             },
             "other": null
         },
-        "deepseek-v3.2-thinking": {
-            "model_id": "deepseek-reasoner",
+        "deepseek-v4-pro": {
+            "model_id": "deepseek-v4-pro",
             "thinking": {
                 "support_thinking": true,
-                "support_Answer": false,
+                "support_Answer": true,
                 "support_auto": false,
-                "support_effort": false,
-                "thinking": null,
-                "Answer": null,
+                "support_effort": true,
+                "thinking": {"type": "enabled"},
+                "Answer": {"type": "disabled"},
                 "auto": null,
-                "effort": null
+                "effort": {
+                    "max": "max",
+                    "hign": "hign"
+                }
             },
             "modality": ["Text"],
             "performance": {
-                "reasoning": 72,
-                "writing": 76,
-                "coding": 79,
+                "reasoning": 90,
+                "writing": 90,
+                "coding": 90,
                 "speed": 40,
-                "cost": 41
+                "cost": 85
             },
             "other": null
         }

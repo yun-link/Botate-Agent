@@ -44,41 +44,39 @@ class ModelRouterConfig:
 @dataclass
 class PathConfig:
     PROJECT_PATH: Path = field(default_factory=lambda: Path(__file__).parent.parent)
-    WORKSPACE_PATH: Path = field(default_factory=lambda: Path(__file__).parent.parent.parent / 'workspace')
 
     def __post_init__(self):
         self.PROJECT_PATH = Path(self.PROJECT_PATH)
         
-        self.WORKSPACE_PATH = Path(self.WORKSPACE_PATH)
-        self.WORKSPACE_PATH.mkdir(exist_ok=True)
-        
+        self.HOME_PATH: Path = Path.home()
+        self.USER_PATH: Path = self.HOME_PATH / '.botate' / 'agent'
+        self.USER_PATH.mkdir(exist_ok=True, parents=True)
         self.CONFIG_PATH: Path = self.PROJECT_PATH / 'config'
         self.MCP_SERVERS_PATH: Path = self.CONFIG_PATH / 'mcp_servers.json'
         self.PROVIDER_INFOS_PATH: Path = self.CONFIG_PATH / 'provider_infos'
-        self.LOGS_PATH: Path = self.PROJECT_PATH / 'logs'
-
+        self.LOGS_PATH: Path = self.USER_PATH / 'logs'
+        self.WORKSPACE_PATH = self.USER_PATH / 'workspace'
+        self.WORKSPACE_PATH.mkdir(exist_ok=True)
         self.ASSETS_PATH: Path = self.PROJECT_PATH / 'assets'
         self.SKILL_PATH: Path = self.ASSETS_PATH / 'skills'
         self.PROMPTS_PATH: Path = self.ASSETS_PATH / 'prompts'
-        self.MEMORYBANK_PATH: Path = self.ASSETS_PATH / 'memory_bank'
+        self.MEMORYBANK_PATH: Path = self.USER_PATH / 'memory'
 
 
 @dataclass
 class AgentConfig:
     WOKRER_AGENT_MODEL: ModelConfig | ModelRouterConfig = field(default_factory=lambda: ModelConfig(model_name='doubao-seed-2.0-lite'))
-    CONTEXT_MANAGER_MODEL: ModelConfig = field(default_factory=lambda: ModelConfig(model_name='doubao-seed-1.8'))
+    CONTEXT_MANAGER_MODEL: ModelConfig = field(default_factory=lambda: ModelConfig(model_name='doubao-seed-2.0-mini'))
 
     MEMORY_SAVE_INTERVAL_HOURS: int = 1
 
 
 @dataclass
 class MemoryBankConfig:
-    EMBEDDING_MODEL: EmbeddingModelConfig = field(default_factory=lambda: EmbeddingModelConfig(model_name='qwen3-embedding-8b'))
     RERANKER_MODEL: RerankerModelConfig = field(default_factory=lambda: RerankerModelConfig(model_name='qwen3-reranker-8b'))
-    SUMMARY_MODEL: ModelConfig = field(default_factory=lambda: ModelConfig(model_name='doubao-seed-1.6-lite'))
+    SUMMARY_MODEL: ModelConfig = field(default_factory=lambda: ModelConfig(model_name='doubao-seed-2.0-mini'))
 
     ENABLE_GENERATE_SUMMARY: bool = True
-    ENABLE_GENERATE_VECTOR: bool = True
     ENABLE_RERANK: bool = True
 
     UPDATE_RATE: int = 72
