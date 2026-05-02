@@ -1,13 +1,10 @@
 aiohttp==3.13.3
 fastapi==0.135.1
-numpy==2.4.3
 openai==2.28.0
 Pillow==12.1.1
 pydantic==2.12.5
 PyYAML==6.0.3
 Requests==2.32.5
-SQLAlchemy==2.0.48
-tos==2.9.0
 uvicorn==0.41.0
 volcengine_python_sdk==5.0.9
 skillkit==0.4.0
