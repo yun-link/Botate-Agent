@@ -1,6 +1,6 @@
 <div align="center">
 
-![logo](./images/Logo.png)
+![logo](./.images/Logo.png)
 
 </div>
 
@@ -54,6 +54,7 @@ Botate-Agent 是一个现代化的 AI Agent 系统，采用前后端分离架构
 - 新增事件系统
 - 新增日志系统
 </details> 
+
 ### 前端特性
 - 💬 实时聊天界面，支持流式响应
 - 🧠 显示助手的推理过程
