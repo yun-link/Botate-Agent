@@ -8,9 +8,9 @@ from pathlib import Path
 import os
 import numpy as np
 import json
+from dataclasses import dataclass
 
 from datetime import datetime
-from dataclasses import dataclass
 
 from .memory import Memory
 from config.config import MemoryBankConfig, load_path_config, load_memory_bank_config
